@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { NewsletterForm } from "@/components/newsletter-form"
 import type { Locale } from "@/lib/i18n"
 import { t, translations } from "@/lib/translations"
-import { ArrowRight, Calendar, Heart, Lightbulb, Smile, Quote } from "lucide-react"
+import { ArrowRight, Calendar, Quote } from "lucide-react"
 
 export default function HomePage({ params }: { params: { locale: Locale } }) {
   const { locale } = params
@@ -33,7 +33,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-              <Link href={`/${locale}#mascaras`}>
+              <Link href={`/${locale}/mascaras`}>
                 {t("hero.ctaDiscover", locale)}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
@@ -44,7 +44,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
               variant="outline"
               className="bg-white/90 border-white text-secondary hover:bg-white"
             >
-              <Link href={`/${locale}#talleres`}>{t("hero.ctaEnroll", locale)}</Link>
+              <Link href={`/${locale}/talleres`}>{t("hero.ctaEnroll", locale)}</Link>
             </Button>
           </div>
         </div>
@@ -79,7 +79,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
                 variant="outline"
                 className="border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
               >
-                <Link href={`/${locale}#mascaras`}>
+                <Link href={`/${locale}/que-es-ctm`}>
                   {locale === "es" && "Leer más"}
                   {locale === "it" && "Leggi di più"}
                   {locale === "en" && "Read more"}
@@ -196,7 +196,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
 
           <div className="text-center">
             <Button asChild size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground">
-              <Link href={`/${locale}#mascaras`}>
+              <Link href={`/${locale}/mascaras`}>
                 {locale === "es" && "Ver el recorrido completo"}
                 {locale === "it" && "Vedi il percorso completo"}
                 {locale === "en" && "See the complete journey"}
@@ -264,7 +264,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
                   {locale === "ca" && "Una introducció intensiva al mètode Clown Through Mask al cor de Barcelona."}
                 </p>
                 <Button asChild className="w-full">
-                  <Link href={`/${locale}#talleres`}>
+                  <Link href={`/${locale}/talleres`}>
                     {locale === "es" && "Info & inscripción"}
                     {locale === "it" && "Info & iscrizione"}
                     {locale === "en" && "Info & enrollment"}
@@ -324,7 +324,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
                     "El recorregut complet de les 6 màscares més el nas vermell. Una experiència transformadora."}
                 </p>
                 <Button asChild className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground">
-                  <Link href={`/${locale}#talleres`}>
+                  <Link href={`/${locale}/talleres`}>
                     {locale === "es" && "Info & inscripción"}
                     {locale === "it" && "Info & iscrizione"}
                     {locale === "en" && "Info & enrollment"}
@@ -375,7 +375,6 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
               {
-                icon: Heart,
                 title:
                   locale === "es"
                     ? "Presencia auténtica"
@@ -388,17 +387,16 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
                           : "Presència autèntica",
                 description:
                   locale === "es"
-                    ? "Desarrolla una presencia escénica genuina y conectada"
+                    ? "Desarrolla una presencia escénica genuina y conectada con tu verdad interior, permitiendo que tu expresión artística fluya desde un lugar de autenticidad."
                     : locale === "it"
-                      ? "Sviluppa una presenza scenica genuina e connessa"
+                      ? "Sviluppa una presenza scenica genuina e connessa con la tua verità interiore, permettendo alla tua espressione artistica di fluire da un luogo di autenticità."
                       : locale === "en"
-                        ? "Develop a genuine and connected stage presence"
+                        ? "Develop a genuine stage presence connected to your inner truth, allowing your artistic expression to flow from a place of authenticity."
                         : locale === "de"
-                          ? "Entwickle eine echte und verbundene Bühnenpräsenz"
-                          : "Desenvolupa una presència escènica genuïna i connectada",
+                          ? "Entwickle eine echte Bühnenpräsenz, die mit deiner inneren Wahrheit verbunden ist und deine künstlerische Ausdrucksweise aus einem Ort der Authentizität fließen lässt."
+                          : "Desenvolupa una presència escènica genuïna i connectada amb la teva veritat interior, permetent que la teva expressió artística flueixi des d'un lloc d'autenticitat.",
               },
               {
-                icon: Lightbulb,
                 title:
                   locale === "es"
                     ? "Exploración emocional"
@@ -411,17 +409,16 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
                           : "Exploració emocional",
                 description:
                   locale === "es"
-                    ? "Espacio seguro para explorar emociones profundas"
+                    ? "Un espacio seguro y contenido para explorar el espectro completo de emociones humanas, desde la vulnerabilidad hasta la alegría, sin juicio ni expectativas."
                     : locale === "it"
-                      ? "Spazio sicuro per esplorare emozioni profonde"
+                      ? "Uno spazio sicuro e contenuto per esplorare lo spettro completo delle emozioni umane, dalla vulnerabilità alla gioia, senza giudizio né aspettative."
                       : locale === "en"
-                        ? "Safe space to explore deep emotions"
+                        ? "A safe and contained space to explore the full spectrum of human emotions, from vulnerability to joy, without judgment or expectations."
                         : locale === "de"
-                          ? "Sicherer Raum zur Erkundung tiefer Emotionen"
-                          : "Espai segur per explorar emocions profundes",
+                          ? "Ein sicherer und geschützter Raum, um das gesamte Spektrum menschlicher Emotionen zu erkunden, von Verletzlichkeit bis Freude, ohne Urteil oder Erwartungen."
+                          : "Un espai segur i contingut per explorar l'espectre complet d'emocions humanes, des de la vulnerabilitat fins a l'alegria, sense judici ni expectatives.",
               },
               {
-                icon: Smile,
                 title:
                   locale === "es"
                     ? "Creatividad liberada"
@@ -434,29 +431,21 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
                           : "Creativitat alliberada",
                 description:
                   locale === "es"
-                    ? "Desbloquea tu potencial creativo a través del juego"
+                    ? "Desbloquea tu potencial creativo a través del juego consciente y la improvisación, descubriendo nuevas formas de expresión que trascienden lo racional."
                     : locale === "it"
-                      ? "Sblocca il tuo potenziale creativo attraverso il gioco"
+                      ? "Sblocca il tuo potenziale creativo attraverso il gioco consapevole e l'improvvisazione, scoprendo nuove forme di espressione che trascendono il razionale."
                       : locale === "en"
-                        ? "Unlock your creative potential through play"
+                        ? "Unlock your creative potential through conscious play and improvisation, discovering new forms of expression that transcend the rational."
                         : locale === "de"
-                          ? "Entfalte dein kreatives Potenzial durch Spiel"
-                          : "Desbloqueja el teu potencial creatiu a través del joc",
+                          ? "Entfalte dein kreatives Potenzial durch bewusstes Spiel und Improvisation und entdecke neue Ausdrucksformen, die das Rationale überschreiten."
+                          : "Desbloqueja el teu potencial creatiu a través del joc conscient i la improvisació, descobrint noves formes d'expressió que transcendeixen el racional.",
               },
-            ].map((benefit, i) => {
-              const Icon = benefit.icon
-              return (
-                <Card key={i} className="hover:shadow-lg transition-shadow">
-                  <CardContent className="p-6 space-y-4">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-medium">{benefit.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{benefit.description}</p>
-                  </CardContent>
-                </Card>
-              )
-            })}
+            ].map((benefit, i) => (
+              <div key={i} className="space-y-4">
+                <h3 className="text-xl font-medium text-primary">{benefit.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{benefit.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -491,7 +480,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
             variant="outline"
             className="border-secondary-foreground/30 hover:bg-secondary-foreground/10 text-secondary-foreground bg-transparent"
           >
-            <Link href={`/${locale}#calendario`}>
+            <Link href={`/${locale}/calendario`}>
               <Calendar className="mr-2 h-5 w-5" />
               {locale === "es" && "Ver calendario"}
               {locale === "it" && "Vedi calendario"}
