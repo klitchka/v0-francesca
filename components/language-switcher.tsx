@@ -1,6 +1,6 @@
 "use client"
 
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { locales, localeNames, type Locale } from "@/lib/i18n"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -8,12 +8,14 @@ import { Globe } from "lucide-react"
 
 export function LanguageSwitcher({ currentLocale }: { currentLocale: Locale }) {
   const pathname = usePathname()
-  const router = useRouter()
 
   const switchLocale = (newLocale: Locale) => {
     const segments = pathname.split("/")
     segments[1] = newLocale
-    router.push(segments.join("/"))
+    const newPath = segments.join("/")
+
+    // Use window.location for full page reload to ensure proper locale switching
+    window.location.href = newPath
   }
 
   return (
