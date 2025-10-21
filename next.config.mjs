@@ -1,14 +1,17 @@
+// next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
+  experimental: {
+    serverActions: { allowedOrigins: ['*'] }
   },
   images: {
-    unoptimized: true,
+    formats: ['image/avif', 'image/webp'],
   },
-}
+  i18n: {
+    locales: ['en', 'es', 'it'],
+    defaultLocale: 'en',
+    localeDetection: false
+  }
+};
 
-export default nextConfig
+export default nextConfig;

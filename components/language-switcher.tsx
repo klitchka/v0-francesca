@@ -1,40 +1,49 @@
-"use client"
+"use client";
 
-import { usePathname } from "next/navigation"
-import { locales, localeNames, type Locale } from "@/lib/i18n"
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Globe } from "lucide-react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { locales, localeNames, type Locale } from "@/lib/i18n";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Globe } from "lucide-react";
 
 export function LanguageSwitcher({ currentLocale }: { currentLocale: Locale }) {
-  const pathname = usePathname()
-
-  console.log("[v0] LanguageSwitcher rendered with currentLocale:", currentLocale)
-  console.log("[v0] Current pathname:", pathname)
+  const router = useRouter();
+  const pathname = usePathname() || "/";
+  const searchParams = useSearchParams();
 
   const switchLocale = (newLocale: Locale) => {
-    console.log("[v0] switchLocale called with:", newLocale)
-    console.log("[v0] Current pathname:", pathname)
+    if (newLocale === currentLocale) return;
 
-    const segments = pathname.split("/")
-    console.log("[v0] Path segments:", segments)
+    // Partes del path actual
+    const segments = pathname.split("/");
+    const isKnownLocale = locales.includes(segments[1] as Locale);
 
-    segments[1] = newLocale
-    const newPath = segments.join("/")
+    // Path sin el prefijo de idioma
+    const restPath = isKnownLocale ? `/${segments.slice(2).join("/")}` : pathname;
+    const query = searchParams?.toString();
+    const hash = typeof window !== "undefined" ? window.location.hash : "";
 
-    console.log("[v0] New path will be:", newPath)
-    console.log("[v0] Navigating to:", newPath)
+    // Nuevo destino con locale
+    const newPath =
+      `/${newLocale}` +
+      (restPath === "/" ? "" : restPath) +
+      (query ? `?${query}` : "") +
+      (hash || "");
 
-    // Use window.location for full page reload to ensure proper locale switching
-    if (typeof window !== "undefined") {
-      window.location.href = newPath
-    }
-  }
+    // Navegación SPA (con refresh por si cargas diccionarios por segment)
+    router.push(newPath);
+    router.refresh();
+  };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="gap-2">
+        <Button variant="ghost" size="sm" className="gap-2" aria-label="Change language">
           <Globe className="h-4 w-4" />
           <span className="uppercase text-sm font-medium">{currentLocale}</span>
         </Button>
@@ -43,10 +52,7 @@ export function LanguageSwitcher({ currentLocale }: { currentLocale: Locale }) {
         {locales.map((locale) => (
           <DropdownMenuItem
             key={locale}
-            onClick={() => {
-              console.log("[v0] Dropdown item clicked for locale:", locale)
-              switchLocale(locale)
-            }}
+            onClick={() => switchLocale(locale)}
             className={currentLocale === locale ? "bg-muted" : ""}
           >
             {localeNames[locale]}
@@ -54,5 +60,5 @@ export function LanguageSwitcher({ currentLocale }: { currentLocale: Locale }) {
         ))}
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

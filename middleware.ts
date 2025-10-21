@@ -1,26 +1,41 @@
-import { NextResponse } from "next/server"
-import type { NextRequest } from "next/server"
-import { locales, defaultLocale } from "@/lib/i18n"
+// middleware.ts
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+const locales = ["en", "es", "it"] as const;
+const DEFAULT_LOCALE = "en";
+
+function getLocale(request: NextRequest) {
+  const accept = request.headers.get("accept-language") || "";
+  const preferred = accept.split(",")[0]?.split("-")[0] || DEFAULT_LOCALE;
+  return locales.includes(preferred as any) ? preferred : DEFAULT_LOCALE;
+}
 
 export function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname
+  const { pathname } = request.nextUrl;
 
-  // Check if the pathname already has a locale
-  const pathnameHasLocale = locales.some((locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`)
-
-  if (pathnameHasLocale) {
-    return NextResponse.next()
+  // Ignorar rutas estáticas/APIs
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname.startsWith("/images") ||
+    pathname.startsWith("/favicon") ||
+    pathname.includes(".")
+  ) {
+    return;
   }
 
-  // Redirect to default locale if no locale is present
-  const locale = defaultLocale
-  request.nextUrl.pathname = `/${locale}${pathname}`
-  return NextResponse.redirect(request.nextUrl)
+  // Si ya tiene locale, no tocar
+  const hasLocale = locales.some((l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`));
+  if (hasLocale) return;
+
+  // Redirigir a locale por defecto (o negociado)
+  const locale = getLocale(request) || DEFAULT_LOCALE;
+  const url = request.nextUrl.clone();
+  url.pathname = `/${locale}${pathname}`;
+  return NextResponse.redirect(url);
 }
 
 export const config = {
-  matcher: [
-    // Skip all internal paths (_next, api, etc)
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\..*|_next).*)",
-  ],
-}
+  matcher: ["/((?!_next|.*\\..*).*)"],
+};

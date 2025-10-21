@@ -119,7 +119,47 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
   body {
     @apply bg-background text-foreground;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 28%, transparent);
+    color: var(--primary-foreground);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+/* ===== Utilities adicionales ===== */
+@layer utilities {
+  /* Evitar numeración accidental en secciones específicas */
+  .no-numbers ol,
+  .no-numbers ul {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+  }
+  .no-numbers li::marker { content: none; }
+
+  /* Reset rápido de listas (si lo prefieres como clase genérica) */
+  .list-reset {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  /* Subrayado elegante para enlaces cuando lo uses como clase */
+  .link-underline {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
   }
 }

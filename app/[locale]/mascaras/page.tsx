@@ -36,17 +36,23 @@ export default function MascarasPage({ params }: { params: { locale: Locale } })
       </section>
 
       {/* Masks Grid */}
-      <section className="py-16 md:py-24">
+      {/* 👇 Añadida clase no-numbers para evitar numeración indeseada */}
+      <section className="py-16 md:py-24 no-numbers">
         <div className="container px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {translations.mascaras.masks.map((mask) => (
-              <Card key={mask.number} className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <Card
+                key={mask.number}
+                className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              >
                 <CardContent className="p-8">
                   <div className="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center text-2xl font-medium mb-6">
                     {mask.number}
                   </div>
                   <h3 className="text-2xl font-light mb-4">{mask.name[locale]}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{mask.description[locale]}</p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {mask.description[locale]}
+                  </p>
                 </CardContent>
               </Card>
             ))}
@@ -72,8 +78,12 @@ export default function MascarasPage({ params }: { params: { locale: Locale } })
                   <div className="w-16 h-16 rounded-full bg-secondary/10 text-secondary flex items-center justify-center text-2xl font-medium mb-6">
                     7
                   </div>
-                  <h3 className="text-3xl font-light mb-4">{t("mascaras.redNose.title", locale)}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{t("mascaras.redNose.description", locale)}</p>
+                  <h3 className="text-3xl font-light mb-4">
+                    {t("mascaras.redNose.title", locale)}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {t("mascaras.redNose.description", locale)}
+                  </p>
                 </CardContent>
               </div>
             </Card>
