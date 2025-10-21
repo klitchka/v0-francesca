@@ -23,7 +23,7 @@ export function Header({ locale }: { locale: Locale }) {
   ]
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-foreground/10 bg-transparent backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-foreground/10 bg-transparent">
       <div className="container flex h-16 items-center justify-between px-4">
         <Link href={`/${locale}`} className="flex items-center space-x-2">
           <span className="text-xl font-medium tracking-wide text-foreground drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
@@ -56,7 +56,7 @@ export function Header({ locale }: { locale: Locale }) {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <nav className="md:hidden border-t border-foreground/10 bg-background/90 backdrop-blur-md">
+        <nav className="md:hidden border-t border-foreground/10 bg-background/70 backdrop-blur-sm">
           <div className="container py-4 px-4 flex flex-col gap-3">
             {navItems.map((item) => (
               <Link
