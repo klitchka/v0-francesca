@@ -23,10 +23,12 @@ export function Header({ locale }: { locale: Locale }) {
   ]
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-foreground/10 bg-transparent backdrop-blur-md">
       <div className="container flex h-16 items-center justify-between px-4">
         <Link href={`/${locale}`} className="flex items-center space-x-2">
-          <span className="text-xl font-medium tracking-wide text-foreground">Francesca Zannier</span>
+          <span className="text-xl font-medium tracking-wide text-foreground drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+            Francesca Zannier
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -35,7 +37,7 @@ export function Header({ locale }: { locale: Locale }) {
             <Link
               key={item.key}
               href={item.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-medium text-foreground/90 hover:text-foreground transition-colors drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]"
             >
               {t(`nav.${item.key}`, locale)}
             </Link>
@@ -54,7 +56,7 @@ export function Header({ locale }: { locale: Locale }) {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <nav className="md:hidden border-t bg-background">
+        <nav className="md:hidden border-t border-foreground/10 bg-background/90 backdrop-blur-md">
           <div className="container py-4 px-4 flex flex-col gap-3">
             {navItems.map((item) => (
               <Link

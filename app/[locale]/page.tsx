@@ -25,10 +25,10 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
         </div>
 
         <div className="relative z-10 container px-4 py-20 text-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white mb-6 max-w-5xl mx-auto leading-tight text-balance">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white mb-6 max-w-5xl mx-auto leading-tight text-balance drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">
             {t("hero.headline", locale)}
           </h1>
-          <p className="text-lg md:text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed text-pretty">
+          <p className="text-lg md:text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed text-pretty drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
             {t("hero.subheadline", locale)}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -51,7 +51,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
       </section>
 
       {/* What is CTM Section */}
-      <section id="que-es-ctm" className="py-16 md:py-24 bg-background">
+      <section id="que-es-ctm" className="py-16 md:py-24 bg-background/80 backdrop-blur-sm">
         <div className="container px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
@@ -101,7 +101,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
         </div>
       </section>
 
-      <section id="mascaras" className="py-16 md:py-24 bg-muted/30">
+      <section id="mascaras" className="py-16 md:py-24 bg-muted/50 backdrop-blur-sm">
         <div className="container px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-light mb-4 text-balance">
@@ -210,7 +210,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
       </section>
 
       {/* Workshops Section */}
-      <section id="talleres" className="py-16 md:py-24 bg-background">
+      <section id="talleres" className="py-16 md:py-24 bg-background/80 backdrop-blur-sm">
         <div className="container px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-light mb-4 text-balance">{t("nav.workshops", locale)}</h2>
@@ -338,7 +338,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
         </div>
       </section>
 
-      <section id="testimonios" className="py-16 md:py-24 bg-muted/30">
+      <section id="testimonios" className="py-16 md:py-24 bg-muted/50 backdrop-blur-sm">
         <div className="container px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-light mb-4 text-balance">{t("testimonials.title", locale)}</h2>
@@ -360,7 +360,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
       </section>
 
       {/* Benefits Section */}
-      <section id="beneficios" className="py-16 md:py-24 bg-background">
+      <section id="beneficios" className="py-16 md:py-24 bg-background/80 backdrop-blur-sm">
         <div className="container px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-light mb-4 text-balance">
@@ -451,7 +451,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
       </section>
 
       {/* Newsletter Section */}
-      <section id="newsletter" className="py-16 md:py-24 bg-muted/30">
+      <section id="newsletter" className="py-16 md:py-24 bg-muted/50 backdrop-blur-sm">
         <div className="container px-4 max-w-3xl mx-auto">
           <NewsletterForm locale={locale} />
         </div>
