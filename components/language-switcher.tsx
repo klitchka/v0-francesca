@@ -9,13 +9,26 @@ import { Globe } from "lucide-react"
 export function LanguageSwitcher({ currentLocale }: { currentLocale: Locale }) {
   const pathname = usePathname()
 
+  console.log("[v0] LanguageSwitcher rendered with currentLocale:", currentLocale)
+  console.log("[v0] Current pathname:", pathname)
+
   const switchLocale = (newLocale: Locale) => {
+    console.log("[v0] switchLocale called with:", newLocale)
+    console.log("[v0] Current pathname:", pathname)
+
     const segments = pathname.split("/")
+    console.log("[v0] Path segments:", segments)
+
     segments[1] = newLocale
     const newPath = segments.join("/")
 
+    console.log("[v0] New path will be:", newPath)
+    console.log("[v0] Navigating to:", newPath)
+
     // Use window.location for full page reload to ensure proper locale switching
-    window.location.href = newPath
+    if (typeof window !== "undefined") {
+      window.location.href = newPath
+    }
   }
 
   return (
@@ -30,7 +43,10 @@ export function LanguageSwitcher({ currentLocale }: { currentLocale: Locale }) {
         {locales.map((locale) => (
           <DropdownMenuItem
             key={locale}
-            onClick={() => switchLocale(locale)}
+            onClick={() => {
+              console.log("[v0] Dropdown item clicked for locale:", locale)
+              switchLocale(locale)
+            }}
             className={currentLocale === locale ? "bg-muted" : ""}
           >
             {localeNames[locale]}
