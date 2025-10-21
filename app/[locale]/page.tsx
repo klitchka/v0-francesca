@@ -4,8 +4,15 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { NewsletterForm } from "@/components/newsletter-form"
 import type { Locale } from "@/lib/i18n"
+import { locales } from "@/lib/i18n"
 import { t, translations } from "@/lib/translations"
 import { ArrowRight, Calendar, Quote } from "lucide-react"
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({
+    locale,
+  }))
+}
 
 export default function HomePage({ params }: { params: { locale: Locale } }) {
   const { locale } = params

@@ -2,8 +2,15 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import type { Locale } from "@/lib/i18n"
+import { locales } from "@/lib/i18n"
 import { t } from "@/lib/translations"
 import { ArrowRight } from "lucide-react"
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({
+    locale,
+  }))
+}
 
 export default function QueEsCTMPage({ params }: { params: { locale: Locale } }) {
   const { locale } = params

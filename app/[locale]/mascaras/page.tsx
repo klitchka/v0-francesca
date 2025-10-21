@@ -3,8 +3,15 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import type { Locale } from "@/lib/i18n"
+import { locales } from "@/lib/i18n"
 import { t, translations } from "@/lib/translations"
 import { ArrowRight } from "lucide-react"
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({
+    locale,
+  }))
+}
 
 export default function MascarasPage({ params }: { params: { locale: Locale } }) {
   const { locale } = params

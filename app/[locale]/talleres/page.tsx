@@ -3,8 +3,15 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import type { Locale } from "@/lib/i18n"
+import { locales } from "@/lib/i18n"
 import { t } from "@/lib/translations"
 import { Calendar, MapPin, Euro } from "lucide-react"
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({
+    locale,
+  }))
+}
 
 export default function TalleresPage({ params }: { params: { locale: Locale } }) {
   const { locale } = params
@@ -146,9 +153,16 @@ export default function TalleresPage({ params }: { params: { locale: Locale } })
                     <Button
                       asChild
                       size="lg"
-                      className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground"
+                      variant="outline"
+                      className="border-secondary-foreground/30 hover:bg-secondary-foreground/10 text-secondary-foreground bg-transparent"
                     >
-                      <Link href={`/${locale}/contacto`}>{t("talleres.cta.reserve", locale)}</Link>
+                      <Link href={`/${locale}/contacto`}>
+                        {locale === "es" && "Contactar"}
+                        {locale === "it" && "Contattare"}
+                        {locale === "en" && "Contact"}
+                        {locale === "de" && "Kontakt"}
+                        {locale === "ca" && "Contactar"}
+                      </Link>
                     </Button>
                   </CardContent>
                 </div>

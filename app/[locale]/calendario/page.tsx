@@ -2,8 +2,15 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import type { Locale } from "@/lib/i18n"
+import { locales } from "@/lib/i18n"
 import { t } from "@/lib/translations"
 import { Calendar, MapPin, CheckCircle, Clock } from "lucide-react"
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({
+    locale,
+  }))
+}
 
 export default function CalendarioPage({ params }: { params: { locale: Locale } }) {
   const { locale } = params
